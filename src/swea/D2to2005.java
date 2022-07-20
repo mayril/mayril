@@ -1,8 +1,8 @@
-package codetest;
+package swea;
 
 import java.util.Scanner;
 
-public class Solution
+public class D2to2005
 {
 public static void main(String args[]) throws Exception
 {
