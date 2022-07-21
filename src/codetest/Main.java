@@ -2,6 +2,7 @@ package codetest;
 
 import java.util.Scanner;
 
+
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -17,19 +18,32 @@ public class Main {
 		N이 3보다 클 경우, 크기 N의 패턴은 공백으로 채워진 가운데의 (N/3)×(N/3) 정사각형을 크기 N/3의 패턴으로 둘러싼 형태이다. 예를 들어 크기 27의 패턴은 예제 출력 1과 같다.
 		 */
 		int star= sc.nextInt();
-		String push="";
-		for (int i = 0; i < star*star; i++) {
-			if(i%3==0) {
-				push+="\r";
-			}
-			if(i!=4) {
-				push+="*";
-			}else {
-				push+=" ";
+		String [][] starfield=new String[star+1][star+1];
+		for (int i = 1; i <=3; i++) {
+			for (int j = 1; j <=3; j++) {
+				if(i>(star/3)&&i<=2*(star/3)&&j>(star/3)&&j<=2*(star/3)) {
+					starfield[i][j]=" ";
+				}
+				else {
+					starfield[i][j]="*";
+				}
+				
 			}
 		}
-		System.out.print(push);
-		System.out.print(push);
+		
+		if(star==3) {
+			for (int i = 1; i <= star; i++) {
+				for (int j = 1; j <= star; j++) {
+					System.out.print(starfield[i][j]);
+					if (j%star==0) {
+						System.out.println();
+					}
+				}
+			}
+		}
+		
+		
+
 	}
 	
 }
