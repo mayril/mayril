@@ -1,5 +1,8 @@
 package codetest;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Solution
@@ -7,58 +10,65 @@ public class Solution
 public static void main(String args[]) throws Exception
 {
 /*
-크기가 N인 파스칼의 삼각형을 만들어야 한다.
+강변에 빌딩들이 옆으로 빽빽하게 밀집한 지역이 있다.
 
-파스칼의 삼각형이란 아래와 같은 규칙을 따른다.
+이곳에서는 빌딩들이 너무 좌우로 밀집하여, 강에 대한 조망은 모든 세대에서 좋지만 왼쪽 또는 오른쪽 창문을 열었을 때 바로 앞에 옆 건물이 보이는 경우가 허다하였다.
 
-1. 첫 번째 줄은 항상 숫자 1이다.
+그래서 이 지역에서는 왼쪽과 오른쪽으로 창문을 열었을 때, 양쪽 모두 거리 2 이상의 공간이 확보될 때 조망권이 확보된다고 말한다.
 
-2. 두 번째 줄부터 각 숫자들은 자신의 왼쪽과 오른쪽 위의 숫자의 합으로 구성된다.
-
-N이 4일 경우,
+빌딩들에 대한 정보가 주어질 때, 조망권이 확보된 세대의 수를 반환하는 프로그램을 작성하시오.
  
-
-
-
-N을 입력 받아 크기 N인 파스칼의 삼각형을 출력하는 프로그램을 작성하시오.
+아래와 같이 강변에 8채의 빌딩이 있을 때, 연두색으로 색칠된 여섯 세대에서는 좌우로 2칸 이상의 공백이 존재하므로 조망권이 확보된다. 따라서 답은 6이 된다.
 
  */
-Scanner sc = new Scanner(System.in);
-int T;
-T=sc.nextInt();
-
+	Scanner sc = new Scanner(System.in);
+	int T=10;
+	//T=sc.nextInt();
+	
 	for(int test_case = 1; test_case <= T; test_case++)
 	{	
-		int triangle=sc.nextInt();
-		int[][] arr1=new int[triangle][triangle];
+		int build=sc.nextInt(); 
+		int[] building=new int[build];
+		int zomang[]=new int[4];
+		int[] zobuild=new int[build];
+		int ok=1;
+		int hsum=0;
 
-		for (int i = 0; i < triangle; i++) {
-			for (int j = 0; j < triangle; j++) {
-				arr1[i][j]=0;
+		for (int i =0 ; i < building.length; i++) {
+			building[i]=sc.nextInt();
+		}
+		
+		for (int i = 2; i < building.length-2; i++) {
+			
+			for (int j = 1; j <= 2; j++) {
+				zomang[j-1]=building[i]-building[i-j];
+				zomang[j+1]=building[i]-building[i+j];
 			}
-		}
-		for (int i = 0; i < triangle; i++) {
-			arr1[0][i]=1;
-		}
-		for (int i = 0; i < triangle; i++) {
-			arr1[i][0]=1;
-		}
-		System.out.println("#"+test_case);
-		for (int  i= 1;  i< triangle; i++) {
-			for (int j = 1; j < triangle; j++) {
-				arr1[i][j]=arr1[i-1][j]+arr1[i][j-1];
-			}
-		}
-		System.out.print(arr1[0][0]+" ");
-		System.out.println();
-		for (int k = 1; k < triangle; k++) {
-				for (int j = 0; j <= k; j++) {
-					System.out.print(arr1[k-j][0+j]+" ");
+			
+			for (int j2 = 0; j2 < zomang.length; j2++) {
+				if(zomang[j2]<=0) {
+					ok=0;
 				}
+			}
+			
+			int mheight=0;
+			
+			if(ok==1) {
+				mheight=zomang[0];
+				
+				for (int k = 0; k < zomang.length; k++) {
+					if(zomang[k]<mheight) {
+						mheight=zomang[k];
+					}
+				}
+			}
+			ok=1;
+			hsum+=mheight;
 
-				System.out.println();
-					
 		}
+		
+		System.out.println("#"+test_case+" "+hsum);
+		
 		
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	
