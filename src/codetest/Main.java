@@ -18,7 +18,7 @@ public class Main {
 		 */
 		int star= sc.nextInt();
 		String push="";
-		for (int i = 0; i < star; i++) {
+		for (int i = 0; i < star*star; i++) {
 			if(i%3==0) {
 				push+="\r";
 			}
