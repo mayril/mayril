@@ -6,34 +6,45 @@ public class Solution
 {
 public static void main(String args[]) throws Exception
 {
-/*
-1차원 초원이 있었다.
+/*한 쪽 벽면에 다음과 같이 노란색 상자들이 쌓여 있다.
 
-................
+높은 곳의 상자를 낮은 곳에 옮기는 방식으로 최고점과 최저점의 간격을 줄이는 작업을 평탄화라고 한다.
 
+평탄화를 모두 수행하고 나면, 가장 높은 곳과 가장 낮은 곳의 차이가 최대 1 이내가 된다.
+
+평탄화 작업을 위해서 상자를 옮기는 작업 횟수에 제한이 걸려있을 때, 제한된 횟수만큼 옮기는 작업을 한 후 최고점과 최저점의 차이를 반환하는 프로그램을 작성하시오.
  
-여기에 공을 몇 개 놓았다. 공은 열린 괄호와 닫힌 괄호가 붙어 있는 ‘()’로 표현되며, 서로 다른 두 공이 겹치지 않는다.
-
-...()..()()...().
-
-
-여기에 잡초가 자라서 몇 개의 칸이 가려지게 되었다. 잡초는 ‘|’로 표현된다.
-
-|..(|.||)||||.().
 
  
 
-위와 같은 과정을 통해 얻어진 문자열이 주어진다. 이때, 초원에 놓았을 수 있는 공의 개수의 최솟값을 구하는 프로그램을 작성하라.
+가장 높은 곳에 있는 상자를 가장 낮은 곳으로 옮기는 작업을 덤프라고 정의한다.
 
-[입력]
+위의 예시에서 제1회 덤프를 수행한 이후 화면은 다음과 같다.
+ 
+ 
 
-첫 번째 줄에 테스트 케이스의 수 T가 주어진다.
+A부분의 상자를 가장 낮은 B부분에 덤프하였으며, A대신 A’부분의 상자를 사용해도 무방하다.
 
-각 테스트 케이스는 한 개의 줄로 이루어지며, 각 줄에는 길이가 1이상 50 이하인 문자열 S가 주어진다. 이 문자열은 위의 과정을 통해 만들어졌음이 보장된다.
+다음은 제2회 덤프를 수행한 이후의 화면이다.
+ 
+ 
 
-[출력]
+A’부분의 상자를 옮겨서, C부분에 덤프하였다. 이때 C 대신 C’부분에 덤프해도 무방하다.
 
-각 테스트 케이스마다, 초원에 놓였을 수 있는 공의 개수의 최솟값을 구하는 프로그램을 작성하라.
+2회의 덤프 후, 최고점과 최저점의 차이는 8 – 2 = 6 이 되었다 (최초덤프 이전에는 9 – 1 = 8 이었다).
+
+덤프 횟수가 2회로 제한된다면, 이 예시 문제의 정답은 6이 된다.
+
+[제약 사항]
+
+가로 길이는 항상 100으로 주어진다.
+
+모든 위치에서 상자의 높이는 1이상 100이하로 주어진다.
+
+덤프 횟수는 1이상 1000이하로 주어진다.
+
+주어진 덤프 횟수 이내에 평탄화가 완료되면 더 이상 덤프를 수행할 수 없으므로 그 때의 최고점과 최저점의 높이 차를 반환한다 (주어진 data에 따라 0 또는 1이 된다).
+
  *  */
 	Scanner sc = new Scanner(System.in);
 
@@ -41,23 +52,33 @@ public static void main(String args[]) throws Exception
 	
 	for(int test_case = 1; test_case <= T; test_case++)
 	{	
-		String field=sc.next();
-		int balls=0;
-		
-		String[] grass=field.split("");
-		for (int i = 0; i < grass.length; i++) {
-			if (grass[i].equals("(")||grass[i].equals(")")) {
-				balls++;
+		int[] arr=new int[100];
+		int dump=sc.nextInt();
+		for (int i = 0; i < 100; i++) {
+			 arr[i]=sc.nextInt();
+		}
+		int min=arr[0];
+		int max=0;
+		int minIndex=0;
+		int maxIndex=0;
+		for (int i = 0; i < dump; i++) {
+			for (int j = 0; j < 100; j++) {
+				if(arr[j]<min) {
+					min=arr[j];
+					minIndex=j;
+				}
+				if (arr[j]>max) {
+					max=arr[j];
+					maxIndex=j;
+				}
 			}
+			arr[minIndex]++;
+			arr[maxIndex]--;
+			
 		}
 		
-		for (int i = 0; i < field.length()-1; i++) {
-			if (field.substring(i, i+2).equals("()")) {
-				balls--;
-			};
-		}
-		
-		System.out.println("#"+test_case+" "+balls);
+		int answer=max-min;
+		System.out.println("#"+test_case+" "+answer);
 		
 		
 	/////////////////////////////////////////////////////////////////////////////////////////////
