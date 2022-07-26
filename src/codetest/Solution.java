@@ -10,64 +10,59 @@ public class Solution
 public static void main(String args[]) throws Exception
 {
 /*
-강변에 빌딩들이 옆으로 빽빽하게 밀집한 지역이 있다.
+1차원 초원이 있었다.
 
-이곳에서는 빌딩들이 너무 좌우로 밀집하여, 강에 대한 조망은 모든 세대에서 좋지만 왼쪽 또는 오른쪽 창문을 열었을 때 바로 앞에 옆 건물이 보이는 경우가 허다하였다.
+................
 
-그래서 이 지역에서는 왼쪽과 오른쪽으로 창문을 열었을 때, 양쪽 모두 거리 2 이상의 공간이 확보될 때 조망권이 확보된다고 말한다.
-
-빌딩들에 대한 정보가 주어질 때, 조망권이 확보된 세대의 수를 반환하는 프로그램을 작성하시오.
  
-아래와 같이 강변에 8채의 빌딩이 있을 때, 연두색으로 색칠된 여섯 세대에서는 좌우로 2칸 이상의 공백이 존재하므로 조망권이 확보된다. 따라서 답은 6이 된다.
 
- */
+여기에 공을 몇 개 놓았다. 공은 열린 괄호와 닫힌 괄호가 붙어 있는 ‘()’로 표현되며, 서로 다른 두 공이 겹치지 않는다.
+
+...()..()()...().
+
+ 
+
+여기에 잡초가 자라서 몇 개의 칸이 가려지게 되었다. 잡초는 ‘|’로 표현된다.
+
+|..(|.||)||||.().
+
+ 
+
+위와 같은 과정을 통해 얻어진 문자열이 주어진다. 이때, 초원에 놓았을 수 있는 공의 개수의 최솟값을 구하는 프로그램을 작성하라.
+
+[입력]
+
+첫 번째 줄에 테스트 케이스의 수 T가 주어진다.
+
+각 테스트 케이스는 한 개의 줄로 이루어지며, 각 줄에는 길이가 1이상 50 이하인 문자열 S가 주어진다. 이 문자열은 위의 과정을 통해 만들어졌음이 보장된다.
+
+[출력]
+
+각 테스트 케이스마다, 초원에 놓였을 수 있는 공의 개수의 최솟값을 구하는 프로그램을 작성하라.
+ *  */
 	Scanner sc = new Scanner(System.in);
-	int T=10;
-	//T=sc.nextInt();
+
+	int T=sc.nextInt();
 	
 	for(int test_case = 1; test_case <= T; test_case++)
 	{	
-		int build=sc.nextInt(); 
-		int[] building=new int[build];
-		int zomang[]=new int[4];
-		int[] zobuild=new int[build];
-		int ok=1;
-		int hsum=0;
-
-		for (int i =0 ; i < building.length; i++) {
-			building[i]=sc.nextInt();
+		String field=sc.next();
+		int balls=0;
+		
+		String[] grass=field.split("");
+		for (int i = 0; i < grass.length; i++) {
+			if (grass[i].equals("(")||grass[i].equals(")")) {
+				balls++;
+			}
 		}
 		
-		for (int i = 2; i < building.length-2; i++) {
-			
-			for (int j = 1; j <= 2; j++) {
-				zomang[j-1]=building[i]-building[i-j];
-				zomang[j+1]=building[i]-building[i+j];
-			}
-			
-			for (int j2 = 0; j2 < zomang.length; j2++) {
-				if(zomang[j2]<=0) {
-					ok=0;
-				}
-			}
-			
-			int mheight=0;
-			
-			if(ok==1) {
-				mheight=zomang[0];
-				
-				for (int k = 0; k < zomang.length; k++) {
-					if(zomang[k]<mheight) {
-						mheight=zomang[k];
-					}
-				}
-			}
-			ok=1;
-			hsum+=mheight;
-
+		for (int i = 0; i < field.length()-2; i++) {
+			if (field.substring(i, i+2).equals("()")) {
+				balls--;
+			};
 		}
 		
-		System.out.println("#"+test_case+" "+hsum);
+		System.out.println("#"+test_case+" "+balls);
 		
 		
 	/////////////////////////////////////////////////////////////////////////////////////////////
