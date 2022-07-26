@@ -1,8 +1,5 @@
 package codetest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class Solution
@@ -15,12 +12,10 @@ public static void main(String args[]) throws Exception
 ................
 
  
-
 여기에 공을 몇 개 놓았다. 공은 열린 괄호와 닫힌 괄호가 붙어 있는 ‘()’로 표현되며, 서로 다른 두 공이 겹치지 않는다.
 
 ...()..()()...().
 
- 
 
 여기에 잡초가 자라서 몇 개의 칸이 가려지게 되었다. 잡초는 ‘|’로 표현된다.
 
@@ -56,7 +51,7 @@ public static void main(String args[]) throws Exception
 			}
 		}
 		
-		for (int i = 0; i < field.length()-2; i++) {
+		for (int i = 0; i < field.length()-1; i++) {
 			if (field.substring(i, i+2).equals("()")) {
 				balls--;
 			};
