@@ -2,11 +2,11 @@ package swea;
 
 import java.util.Scanner;
 /*
- * ë‹¬íŒ½ì´ëŠ” 1ë¶€í„° N*Nê¹Œì§€ì˜ ìˆ«ìê°€ ì‹œê³„ë°©í–¥ìœ¼ë¡œ ì´ë£¨ì–´ì ¸ ìˆë‹¤.
+ * ?‹¬?Œ½?´?Š” 1ë¶??„° N*Nê¹Œì??˜ ?ˆ«?ê°? ?‹œê³„ë°©?–¥?œ¼ë¡? ?´ë£¨ì–´? ¸ ?ˆ?‹¤.
 
-ë‹¤ìŒê³¼ ê°™ì´ ì •ìˆ˜ Nì„ ì…ë ¥ ë°›ì•„ Ní¬ê¸°ì˜ ë‹¬íŒ½ì´ë¥¼ ì¶œë ¥í•˜ì‹œì˜¤.
+?‹¤?Œê³? ê°™ì´ ? •?ˆ˜ N?„ ?…? ¥ ë°›ì•„ N?¬ê¸°ì˜ ?‹¬?Œ½?´ë¥? ì¶œë ¥?•˜?‹œ?˜¤.
  */
-public class D2to1954ë‹¬íŒ½ì´ìˆ«ì{
+public class D2to1954{
 	public static void main(String args[]) {
 
 		Scanner sc = new Scanner(System.in);
@@ -24,14 +24,14 @@ public class D2to1954ë‹¬íŒ½ì´ìˆ«ì{
 			
 			
 				if(t<size*size+1) {
-			 		for (int x = k; x < size-k; x++) {	//ê°€ë¡œ ìœ„1ì¤„	
+			 		for (int x = k; x < size-k; x++) {	//ê°?ë¡? ?œ„1ì¤?	
 						arr1[k][x]=t++;
 					}
 			 		if(t==size*size+1) {
 						break;
 					}
 					
-					for (int y = 1+k; y < size-k; y++) {	//ì„¸ë¡œ ì˜¤ë¥¸ìª½ 1ì¤„
+					for (int y = 1+k; y < size-k; y++) {	//?„¸ë¡? ?˜¤ë¥¸ìª½ 1ì¤?
 							arr1[y][size-1-k]=t++;
 
 					}
@@ -39,7 +39,7 @@ public class D2to1954ë‹¬íŒ½ì´ìˆ«ì{
 						break;
 					}
 					
-					for (int x = size-2-k; x >=0+k; x--) {	// ê°€ë¡œ ì•„ë˜ ì—­ 1ì¤„
+					for (int x = size-2-k; x >=0+k; x--) {	// ê°?ë¡? ?•„?˜ ?—­ 1ì¤?
 						arr1[size-1-k][x]=t++;
 
 					}
@@ -47,7 +47,7 @@ public class D2to1954ë‹¬íŒ½ì´ìˆ«ì{
 						break;
 					}
 					
-					for (int y = size-2-k; y >=1+k; y--) {		// ì„¸ë¡œ ì™¼ìª½ ì—­ 1ì¤„
+					for (int y = size-2-k; y >=1+k; y--) {		// ?„¸ë¡? ?™¼ìª? ?—­ 1ì¤?
 						arr1[y][k]=t++;	
 					}
 					if(t==size*size+1) {
