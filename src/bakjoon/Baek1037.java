@@ -1,9 +1,9 @@
-package codetest;
+package bakjoon;
 
 import java.util.Scanner;
 
 
-public class Main {
+public class Baek1037 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int a=sc.nextInt();
