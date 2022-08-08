@@ -28,46 +28,46 @@ public static void main(String args[]) throws Exception
 	for(int test_case = 1; test_case <= T; test_case++)
 	{	
 		int build=sc.nextInt(); 
-		int[] building=new int[build];
-		int zomang[]=new int[4];
+		int[] building=new int[build]; //빌딩의 수
+		int zomang[]=new int[4]; //조망권
 		int[] zobuild=new int[build];
-		int ok=1;
-		int hsum=0;
+		int ok=1;// 조망이 가능한지 유무
+		int hsum=0;//최대높이
 
 		for (int i =0 ; i < building.length; i++) {
-			building[i]=sc.nextInt();
+			building[i]=sc.nextInt();// 높이 입력
 		}
 		
-		for (int i = 2; i < building.length-2; i++) {
+		for (int i = 2; i < building.length-2; i++) { // 시작지점은 2부터 끝지점은 -2까지
 			
-			for (int j = 1; j <= 2; j++) {
+			for (int j = 1; j <= 2; j++) {//좌우 2채
 				zomang[j-1]=building[i]-building[i-j];
 				zomang[j+1]=building[i]-building[i+j];
 			}
 			
 			for (int j2 = 0; j2 < zomang.length; j2++) {
-				if(zomang[j2]<=0) {
-					ok=0;
+				if(zomang[j2]<=0) { //조망이  가려진다면
+					ok=0; // ok는 0이다
 				}
 			}
 			
-			int mheight=0;
+			int mheight=0; //최대높이
 			
-			if(ok==1) {
-				mheight=zomang[0];
+			if(ok==1) { //조망이 가능하다면
+				mheight=zomang[0]; 
 				
 				for (int k = 0; k < zomang.length; k++) {
 					if(zomang[k]<mheight) {
-						mheight=zomang[k];
+						mheight=zomang[k];//조망값중 최대값 구함
 					}
 				}
 			}
-			ok=1;
-			hsum+=mheight;
+
+			hsum+=mheight;//최대값의 합을 더함
 
 		}
 		
-		System.out.println("#"+test_case+" "+hsum);
+		System.out.println("#"+test_case+" "+hsum);//
 		
 		
 	/////////////////////////////////////////////////////////////////////////////////////////////
