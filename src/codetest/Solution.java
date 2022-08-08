@@ -7,6 +7,7 @@ public class Solution
 public static void main(String args[]) throws Exception
 {
 /*
+ * 10개의 수를 입력 받아, 그 중에서 가장 큰 수를 출력하는 프로그램을 작성하라.
  *  */
 	Scanner sc = new Scanner(System.in);
 
@@ -14,13 +15,20 @@ public static void main(String args[]) throws Exception
 
 	for(int test_case = 1; test_case <= T; test_case++)
 	{	
-		//vscode에서 display none과 visibility none의 차이
-		//id 다음에오는 span태그 //<&lt ? >&gt
- 		System.out.println("#"+test_case+" ");
-		//nth child
- 		
- 		//flex box
+		int [] arr1=new int[10];
+		for (int i = 0; i < 10; i++) {
+			arr1[i]=sc.nextInt();
+		}
 		
+		
+		int max=0;
+		
+		for (int i = 0; i < 10; i++) {
+			if (arr1[i]>max) {
+				max=arr1[i];
+			}
+		}
+		System.out.println("#"+test_case+" "+max);
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	
 	}
