@@ -1,7 +1,7 @@
 package swea;
 import java.util.Scanner;
 
-class Solution
+public class D2to1926
 {
 public static void main(String args[]) throws Exception
 {
