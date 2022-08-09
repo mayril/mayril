@@ -27,19 +27,20 @@ public class Main {
 			arr[i]=sc.nextInt();
 		}
 		
-		//Arrays.sort(arr);
+
 		
-		for (int i = n-1; i >=0; i--) {
-			System.out.println(sum);
+		for (int i = 0; i <n; i++) {
 			if (sum<=m) {
 				sum+=arr[i];
-			}else {
-				sum=0;
-				cnt++;
-				i++;
+				//System.out.println(sum);
+				if (sum>m) {
+					sum=0;
+					cnt++;
+					i--;
 				}
-			
+			}
 		}
+		
 		if (n==0) {
 			System.out.println(0);
 		}else {
