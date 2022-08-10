@@ -16,11 +16,10 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		Scanner sc = new Scanner(System.in);
-		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int n=sc.nextInt();
-		int m=sc.nextInt();
-		int sum=0;
-		int cnt=1;
+		int n=sc.nextInt(); //n입력
+		int m=sc.nextInt(); //m입력
+		int sum=0;			//n의 합 초기값
+		int cnt=1;			//상자 수//초기값으로 1개부터 시작
 		
 		int [] arr=new int[n];
 		for (int i = 0; i < n; i++) {
@@ -30,19 +29,18 @@ public class Main {
 
 		
 		for (int i = 0; i <n; i++) {
-			if (sum<=m) {
-				sum+=arr[i];
-				//System.out.println(sum);
-				if (sum>m) {
-					sum=0;
-					cnt++;
-					i--;
+			if (sum<=m) { //합이 m보다 작으면
+				sum+=arr[i]; //sum값에 i번째 책 추가
+				if (sum>m) { //sum 값이 m보다 커지면
+					sum=0; //초기화
+					cnt++; //상자추가
+					i--; //i번째 하나 감소
 				}
 			}
 		}
 		
 		if (n==0) {
-			System.out.println(0);
+			System.out.println(0); //담을게없으면 0
 		}else {
 			System.out.println(cnt);
 		}
