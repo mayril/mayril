@@ -5,67 +5,65 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /* */
 public class Main {
+	
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	//	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
-		int n=Integer.parseInt(br.readLine());
-		int [] arr=new int[n];
-		int [] countarr=new int[8001];
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		for (int i = 0; i < arr.length; i++) {
-			arr[i]=Integer.parseInt(br.readLine());
-			countarr[arr[i]+4000]++;
+		Scanner sc=new Scanner(System.in);
+		
+		int swicnt=Integer.parseInt(br.readLine());
+		int[] swi=new int[swicnt];
+		StringTokenizer st=new StringTokenizer(br.readLine());
+		for (int i = 0; i < swicnt; i++) {
+			swi[i]=Integer.parseInt(st.nextToken());
 		}
-		
-		int [] arr3=arr;
-		Arrays.sort(arr3);
-		int max=arr3[n - 1];
-		int min= arr3[0];
-		int maxarr=0;
-		int bin=0;
-		boolean flag = false;
-		
-		for(int i = min + 4000; i <= max + 4000; i++) {
-			
-			if(countarr[i] > 0) {
+		int stu=Integer.parseInt(br.readLine());
 
-				if(maxarr < countarr[i]) {
-					maxarr = countarr[i];
-					bin = i - 4000;
-					flag = true;
+		for (int i = 0; i < stu; i++) {
+			st=new StringTokenizer(br.readLine());
+			int gender=Integer.parseInt(st.nextToken());
+			int sit=Integer.parseInt(st.nextToken());
+			
+			if (gender==1) {
+				for (int j = 0; j < swicnt; j++) {
+					if ((j+1)%sit==0) {
+						swi[j] = swi[j] == 0 ? 1 : 0;
+					}
 				}
-				else if(maxarr == countarr[i] && flag == true) {
-					bin = i - 4000;
-					flag = false;					
+			}else {
+				swi[sit-1] = swi[sit-1] == 0 ? 1 : 0;
+				for(int j=1; j<swicnt/2; j++) {
+					if(sit-1+j >= swicnt || sit-1-j < 0)
+						break;
+					if(swi[sit-1-j] == swi[sit-1 + j]) {
+						swi[sit-1-j] = swi[sit-1-j] == 0 ? 1 : 0;
+						swi[sit-1+j] = swi[sit-1+j] == 0 ? 1 : 0;
+					}
+					else break; 
 				}
 			}
 		}
-
 		
-		double sum=0;
-		for (int i : arr) {
-			sum+=i;
+		for (int j = 0; j < swi.length; j++) {
+			bw.write(String.valueOf(swi[j])+" ");
+			if ((j+1)%20==0) {
+				bw.write("\n");
+			}
 		}
-
-		System.out.println((int)Math.round((double)sum/n));
-		
-		System.out.println(arr[n/2]);
-		
-		System.out.println(bin);
-		
-		System.out.println(arr3[n - 1] - arr3[0]);
 		br.close();
-
+		bw.close();
 		//-----------------------
 	}
+	
+
 
 	
 	
