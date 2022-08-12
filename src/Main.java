@@ -5,66 +5,69 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-/* */
+
 public class Main {
-	
-	
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
 		Scanner sc=new Scanner(System.in);
 		
-		int swicnt=Integer.parseInt(br.readLine());
-		int[] swi=new int[swicnt];
-		StringTokenizer st=new StringTokenizer(br.readLine());
-		for (int i = 0; i < swicnt; i++) {
-			swi[i]=Integer.parseInt(st.nextToken());
-		}
-		int stu=Integer.parseInt(br.readLine());
+		int width=sc.nextInt();
+		int height=sc.nextInt();
+		int store=sc.nextInt();
+		int []arr =new int[store];
+		int dgPos=0;
+		int sum=0;
+		for (int i = 0; i <= store; i++) {
+			int tmpPos=0;
+			int posS=sc.nextInt();
+			int posL=sc.nextInt();
 
-		for (int i = 0; i < stu; i++) {
-			st=new StringTokenizer(br.readLine());
-			int gender=Integer.parseInt(st.nextToken());
-			int sit=Integer.parseInt(st.nextToken());
-			
-			if (gender==1) {
-				for (int j = 0; j < swicnt; j++) {
-					if ((j+1)%sit==0) {
-						swi[j] = swi[j] == 0 ? 1 : 0;
-					}
-				}
+			if (posS==1) {
+				tmpPos=posL;
+			}else if (posS==2) {
+				tmpPos=2*width+height-posL;
+			}else if (posS==3) {
+				tmpPos=2*width+2*height-posL;
+			}else if (posS==4) {
+				tmpPos=posL+width;
+			}
+			if (i<store) {
+				arr[i]=tmpPos;
 			}else {
-				swi[sit-1] = swi[sit-1] == 0 ? 1 : 0;
-				for(int j=1; j<swicnt/2; j++) {
-					if(sit-1+j >= swicnt || sit-1-j < 0)
-						break;
-					if(swi[sit-1-j] == swi[sit-1 + j]) {
-						swi[sit-1-j] = swi[sit-1-j] == 0 ? 1 : 0;
-						swi[sit-1+j] = swi[sit-1+j] == 0 ? 1 : 0;
-					}
-					else break; 
-				}
+				dgPos=tmpPos;
+			}
+			
+		}
+		
+		for (int i = 0; i < store; i++) {
+			int cloak=dgPos-arr[i];
+			if (cloak>0) {
+				cloak=dgPos-arr[i];
+			}else {
+				cloak=cloak*(-1);
+			}
+			int anticloak= 2*width+2*height-cloak;
+			if (cloak>=anticloak) {
+				sum +=anticloak;
+			}else {
+				sum+=cloak;
 			}
 		}
 		
-		for (int j = 0; j < swi.length; j++) {
-			bw.write(String.valueOf(swi[j])+" ");
-			if ((j+1)%20==0) {
-				bw.write("\n");
-			}
-		}
+		System.out.println(sum);
+		//	1
+		//3   4
+		//	2
 		br.close();
 		bw.close();
 		//-----------------------
 	}
-	
-
-
-	
 	
 }
