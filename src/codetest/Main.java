@@ -1,53 +1,62 @@
 package codetest;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
-/*
- 숌은 짐을 챙겨서 겨울캠프에서 집으로 가려고 한다. 근데 숌은 공부를 많이 하러 캠프에 온 것이기 때문에 책을 엄청나게 많이 가지고 왔다. 숌은 이 책을 방에 탑처럼 쌓아 놨다.
-
-숌은 책을 박스에 차곡차곡 넣어서 택배로 미리 보내려고 한다. 책은 탑처럼 차곡차곡 쌓여있기 때문에, 차례대로 박스에 넣을 수밖에 없다.
-
-각각의 책은 무게가 있다. 그리고 박스는 최대 넣을수 있는 무게가 있다. 숌이 필요한 박스의 개수의 최솟값을 구하는 프로그램을 작성하시오.
- */
 public class Main {
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		Scanner sc = new Scanner(System.in);
-		int n=sc.nextInt(); //n입력
-		int m=sc.nextInt(); //m입력
-		int sum=0;			//n의 합 초기값
-		int cnt=1;			//상자 수//초기값으로 1개부터 시작
-		
-		int [] arr=new int[n];
-		for (int i = 0; i < n; i++) {
-			arr[i]=sc.nextInt();
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		int arr[][] = new int[501][501];
+		int xlocation = 499;
+		int ylocation = 499;
+		int sum = 0;
+		int dr = 0;
+		int dt = 0;
+		int K = Integer.parseInt(br.readLine());
+		for(int i = 0; i<6; i++) {
+			st = new StringTokenizer(br.readLine());
+			dr = Integer.parseInt(st.nextToken());
+			dt = Integer.parseInt(st.nextToken());
+			switch(dr) {
+			case 1:
+				for(int a = 0; a<dt-1; a++) {
+					arr[ylocation][xlocation] = 1;
+					xlocation++;
+				}
+				break;
+			case 2:
+				for(int a = 0; a<dt-1; a++) {
+					arr[ylocation][xlocation] = 1;
+					xlocation--;
+				}
+				break;
+			case 3:
+				for(int a = 0; a<dt-1; a++) {
+					arr[ylocation][xlocation] = 1;
+					ylocation++;
+				}
+				break;
+			case 4:
+				for(int a = 0; a<dt-1; a++) {
+					arr[ylocation][xlocation] = 1;
+					ylocation--;
+				}
+				break;
+			}
 		}
-		
-
-		
-		for (int i = 0; i <n; i++) {
-			if (sum<=m) { //합이 m보다 작으면
-				sum+=arr[i]; //sum값에 i번째 책 추가
-				if (sum>m) { //sum 값이 m보다 커지면
-					sum=0; //초기화
-					cnt++; //상자추가
-					i--; //i번째 하나 감소
+		for(int i = 1; i<arr.length-1; i++) {
+			for(int j = 1; j<arr[i].length-1; j++) {
+				if(arr[i][j-1]==1) { //전칸이 1이면
+					arr[i][j] = 1; //다음칸이 1로 저장됨 (넓이를 구하기 위해 내부칸을 전부 색칠하기 위함.)
+				}
+				if(arr[i][j] == 1) {
+					sum++;
 				}
 			}
 		}
-		
-		if (n==0) {
-			System.out.println(0); //담을게없으면 0
-		}else {
-			System.out.println(cnt);
-		}
-		
-		//-----------------------
+		System.out.println(sum);
+		System.out.println(sum*K);
 	}
-
-	
-	
 }
