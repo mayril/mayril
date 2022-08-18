@@ -24,6 +24,12 @@ public static void main(String args[]) throws IOException {
 		String[] arr=k.split("");
 		int sum=0;
 		int t=1;
+		
+		for (int i = 0; i < arr.length-1; i++) {
+			if (arr[i].equals("(")&&arr[i+1].equals(")")) {
+				
+			}
+		}
 		for (int i = 0; i < arr.length; i++) {
 			if (arr[i].equals("(")) {
 				stack.push("(");
