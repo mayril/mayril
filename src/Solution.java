@@ -4,14 +4,16 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 
 public class Solution{
-
+	static int[] arr;
+	static int count,k,sum,n;
+	static LinkedList<Integer> linkedList;
+	static boolean[] visit;
 public static void main(String args[]) throws IOException {
 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -19,32 +21,43 @@ public static void main(String args[]) throws IOException {
 	int T=Integer.parseInt(br.readLine());
 	//int T=10;
 	for(int test_case = 1; test_case <= T; test_case++){
-		Stack<String>stack=new Stack<>();
-		String k=br.readLine();
-		String[] arr=k.split("");
-		int sum=0;
-		int t=1;
+		StringTokenizer st=new StringTokenizer(br.readLine());
+		n=Integer.parseInt(st.nextToken());
+		k=Integer.parseInt(st.nextToken());
+		count=0;
+		arr= new int[n];
+		visit=new boolean[n];
+		st=new StringTokenizer(br.readLine());
+		for (int i = 0; i < n; i++) {
+			arr[i]=Integer.parseInt(st.nextToken());
+		}
 		
-		for (int i = 0; i < arr.length-1; i++) {
-			if (arr[i].equals("(")&&arr[i+1].equals(")")) {
-				
-			}
+		get(0, 0);
+
+		int sum=0;
+		System.out.println("#"+test_case+" "+count);
+	}
+	
+	
+}
+	public static void get(int a, int cnt) {
+		cnt++;
+		int tmp=sum;
+
+		if (sum==k) {
+			count++;
+			return;
+		}
+		if (cnt==n) {
+			return;
 		}
 		for (int i = 0; i < arr.length; i++) {
-			if (arr[i].equals("(")) {
-				stack.push("(");
-				sum++;
-			}else {
-				stack.pop();
-				sum--;
-				sum+=stack.size();
-			}
-			System.out.println(sum);
+		if (visit[i]==false) {
+			visit[i]=true;
+			sum+=arr[i];
+			get(a+1, cnt);
+			visit[i]=false;
+		}		
 		}
-		//(((1(11))(1)1))(11)
-		System.out.println("#"+test_case+" "+sum);
-	}
-
-	}
+	} 
 }
-
