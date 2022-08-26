@@ -8,39 +8,81 @@ import java.util.StringTokenizer;
 
 
 public class Main {
-		static int[] arr;
+		static int[][] arr;
+		static int k,c,r;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		Scanner sc=new Scanner(System.in);
-		//StringTokenizer st=new StringTokenizer(br.readLine());
+		StringTokenizer st=new StringTokenizer(br.readLine());
 		//int n=Integer.parseInt(br.readLine());
-		//StringBuilder sBuilder=new StringBuilder();
-		for (int i = 0; i < 4; i++) {
-			StringTokenizer st=new StringTokenizer(br.readLine());
-			int x=Integer.parseInt(st.nextToken());
-			int y=Integer.parseInt(st.nextToken());
-			int p=Integer.parseInt(st.nextToken());
-			int q=Integer.parseInt(st.nextToken());
-			// p,y x,q
-			int x1=Integer.parseInt(st.nextToken());
-			int y1=Integer.parseInt(st.nextToken());
-			int p1=Integer.parseInt(st.nextToken());
-			int q1=Integer.parseInt(st.nextToken());
-			// x,q p,y
-			if (x1>p||p1<x||y1>q||q1<y) {
-				System.out.println("d");
-			}else if ((p==x1&&q==y1)||(p==x1&&y==q1)||(x==p1&&y==q1)||(x==p1&&q==y1)) {
-				System.out.println("c");
-			}else if (p==x1||p1==x||y==q1||q==y1) {
-				System.out.println("b");
-			}else {
-				System.out.println("a");
+		//StringBuilder sBuilder=new StringBuilder()
+		c=Integer.parseInt(st.nextToken());
+		r=Integer.parseInt(st.nextToken());
+		arr=new int[c][r];
+		int size=0;
+		
+		for (int i = 0; i < c; i++) {
+			String[] arr2=br.readLine().split("");
+			for (int j = 0; j < r; j++) {
+				arr[i][j]=Integer.parseInt(arr2[j]);
 			}
 		}
 		
-		
-		
-		System.out.println();
+
+		k=0;
+		for (int i = 0; i < c; i++) {
+			for (int j = 0; j < r; j++) {
+				dia(i, j); 
+			}
+		}
+		System.out.println(k);
 	}//main-end
+	
+	public static void dia(int i,int j) {
+		int g=0;
+		if (r>c) {
+			g=c;
+		}else {
+			g=r;
+		}
+		boolean t=true;
+		while (t) {
+			for (int y = k; y <= g/2 ; y++) {
+				if (i+k<c&&j+k<r&&i-k>=0&&j-k>=0) {
+					if (arr[i+k][j]==1&&arr[i][j+k]==1&&arr[i-k][j]==1&&arr[i][j-k]==1) {
+						for (int l = 0; l < k-2; l++) {
+							if (arr[i+l][j-k+l]!=1) {
+								return;
+							}
+						}
+						for (int l = 0; l < k-2; l++) {
+							if (arr[i-k+l][j+l]!=1) {
+								return;
+							}				
+						}
+						for (int l = 0; l < k-2; l++) {
+							if (arr[i+l][j+k-l]!=1) {
+								return;
+							}
+						}
+						for (int l = 0; l < k-2; l++) {
+							if (arr[i+k-l][j+l]!=1) {
+								return;
+							}
+						}
+						if (t) {
+							System.out.println("i"+i+"J"+j);
+							k=y;
+							System.out.println(k);
+						}
+					}else 
+						return;
+					
+				}else 
+					return;
+			}
+		}
+		return;
+	}
 }//class-end
