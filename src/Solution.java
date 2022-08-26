@@ -16,96 +16,63 @@ public static void main(String args[]) throws IOException {
     int T=Integer.parseInt(br.readLine());
     //int T=10;
     for(int test_case = 1; test_case <= T; test_case++){
-		//StringTokenizer st=new StringTokenizer(br.readLine());
-		StringTokenizer st=new StringTokenizer(br.readLine());
-		int n=Integer.parseInt(st.nextToken());
-		String [][] arr=new String[n][n];
-		String result="NO";
-		int count=0;
-		for (int i = 0; i < n; i++) {
-			String[] sp=br.readLine().split("");
-			for (int j = 0; j < n; j++) {
-				arr[i][j]=sp[j];
+	    String result="DIFF";
+	    
+	    StringTokenizer st=new StringTokenizer(br.readLine());
+	    String a=st.nextToken();
+	    String[] arr1=new String[a.length()];
+	    arr1=a.split("");
+	    String b=st.nextToken(); 
+	    String[] arr2=new String[b.length()];
+	    arr2=b.split("");
+	    for (int i = 0; i < arr1.length; i++) {
+	    	String k=arr1[i];
+			switch (k) {
+			case "C": case "E":case "F":case "G":case "H":case "I":case "J":case "K":case "L":case "M":
+			case "N": case "S":case "T":case "U":case "V":case "W":case "X":case "Y":case "Z":
+				arr1[i]="a";
+				break;
+
+			case "A": case "D": case  "O": case  "P": case "Q": case "R":
+				arr1[i]="b";
+				break;
+			case "B":
+				arr1[i]="c";
+				break;
 			}
 		}
-		
-		//가로 
-		for (int i = 0; i < n; i++) {
-			count=0;
-			for (int j = 0; j < n; j++) {
-				if (arr[i][j].equals("o")) {
-					count++;
-					if (count>=5) {
-						result="YES";
-					}
-				}else {
-					count=0;
+	    
+	    for (int i = 0; i < arr2.length; i++) {
+	    	String k=arr2[i];
+			switch (k) {
+			case "C": case "E":case "F":case "G":case "H":case "I":case "J":case "K":case "L":case "M":
+			case "N": case "S":case "T":case "U":case "V":case "W":case "X":case "Y":case "Z":
+				arr2[i]="a";
+				break;
+
+			case "A": case "D": case "O": case "P": case "Q": case "R":
+				arr2[i]="b";
+				break;
+			case "B":
+				arr2[i]="c";
+				break;
+			}
+		}
+
+	   
+	    if (arr1.length==arr2.length) {
+	    	result="SAME";
+			for (int i = 0; i < arr2.length; i++) {
+				if (!arr1[i].equals(arr2[i])) {
+					result="DIFF";
 				}
 			}
 		}
-		//세로
-		for (int i = 0; i < n; i++) {
-			count=0;
-			for (int j = 0; j <n; j++) {
-				
-				if (arr[j][i].equals("o")) {
-					count++;
-					if (count>=5) {
-						result="YES";
-					}
-				}else {
-					count=0;
-				}
-			}	
-		}
-		//대각선
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				//대각선 \ 방향
-				count=0;
-				if (arr[i][j].equals("o")) {
-					for (int i2 = 0; i2 < n; i2++) {
-						for (int j2 = 0; j2 < n; j2++) {
-							if ((i-i2)==(j-j2)) {
-								if (arr[i2][j2].equals("o")) {
-									count++;
-									if (count>=5) {
-										result="YES";
-									}
-								}else {
-									count=0;
-								}
-							}
-						}
-					}
-					
-					count=0;
-					for (int i2 = 0; i2 < n; i2++) {
-						for (int j2 = 0; j2 < n; j2++) {
-							if ((i-i2)==-(j-j2)) {
-								if (arr[i2][j2].equals("o")) {
-									count++;
-									if (count>=5) {
-										result="YES";
-									}
-								}else {
-									count=0;
-								}
-							}
-						}
-					}
-				}
-				
-				
-				//대각선 /방향
-				
-			}
-		}
-		
-		
-		
-		System.out.println("#"+test_case+" "+result);
+	    
+	    System.out.println("#"+test_case+" "+result);
     }//for_end
+	
 }//main_end
+	
 	
 }//class_end
