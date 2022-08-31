@@ -10,73 +10,71 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 
-public class Solution
-{
-		public static int[] arr2;
-		public static int max = 0;
-public static void main(String args[]) throws NumberFormatException, IOException 
-{
+public class Solution{
+
+public static void main(String args[]) throws IOException{
 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 	Scanner sc = new Scanner(System.in);
 
-	int T=sc.nextInt();
+	int T=Integer.parseInt(br.readLine());
 	for(int test_case = 1; test_case <= T; test_case++)
 	{	
-		max=0;
-		String k=sc.next();	//숫자 입력값
-		int time=sc.nextInt(); //교환횟수
-		String[] arr=k.split("");	
-		arr2=new int[arr.length];
-		// 자릿수 나눠서 배열에 집어넣음
-		for (int i = 0; i < arr2.length; i++) {
-			arr2[i]=Integer.parseInt(arr[i]);
+		StringTokenizer st=new StringTokenizer(br.readLine());
+		int n=Integer.parseInt(st.nextToken());
+		int m=Integer.parseInt(st.nextToken());
+		int k=Integer.parseInt(st.nextToken());
+		int []customer=new int[n]; //손님이 오는 시간
+		String result="";
+		boolean po=true; //while문 탈출용
+		boolean ip=true; //결과값 T/F구분
+		int bread=0; //빵의 갯수
+		int max=0; //가장 늦게 오는 손님의 시간
+		int cnt=0; // 시간초
+		st=new StringTokenizer(br.readLine());
+		for (int i = 0; i < n; i++) {
+			customer[i]=Integer.parseInt(st.nextToken());
+			if (max<customer[i]) { //가장 늦게 오는 손님
+				max=customer[i];
+			}
+		}
+		
+
+		while (po) {
+			if (cnt>=m&&cnt%m==0) {
+				bread+=k; //빵이 m초마다 k개 씩 추가
+			}
+			for (int j = 0; j < customer.length; j++) {
+				if (customer[j]==cnt) { //손님이 해당하는 시간에오면 붕어빵--
+						bread--;
+				}
+			}
+			//System.out.println(bread);
+			if (bread<0) { //빵을 제공할수없으면 impossible
+				ip=false;
+			}
+			
+			if (cnt==max) {//손님이 다왔다면 while문 탈출
+				po=false;
+			}
+			cnt++;
+		}
+		
+		if (ip) {
+			result="Possible";
+		}else {
+			result="Impossible";
 		}
 
-		dfs(0, 0, time);
-		
-		System.out.println("#" + test_case + " " + max);
+		System.out.println("#" + test_case + " "+result);
 	/////////////////////////////////////////////////////////////////////////////////////////////	
 	}
 	}
-	public static void change(int a,int b) {
-		int tmp=0;
-		tmp=arr2[a];
-		arr2[a]=arr2[b];
-		arr2[b]=tmp;
-	}
-	
-	public static void dfs(int index,int cnt,int time) {		
-		if (time==cnt) {
-			StringBuffer sb = new StringBuffer();
-            for(int i : arr2)
-                sb.append(i);
-            // 최대값 비교
-            max = Math.max(max, Integer.parseInt(sb.toString()));
-            return;
-		}
-		//전 범위 탐색 (시작 인덱스 ~ 끝)
-		for (int i = index; i < arr2.length-1; i++) {
-			 // 전 범위 탐색(시작 + 1 ~ 끝)
-			for (int j = i+1; j < arr2.length; j++) {
-				if(arr2[i] <= arr2[j]) {
-					change(i, j);
-					//for (int j2 = 0; j2 < arr2.length; j2++) {
-					//	System.out.print(arr2[j2]);
-					//}
-					//System.out.println();
-					dfs(i, cnt+1, time);	
-					//System.out.println(max);
-					
-					change(i, j);
-				}
-			}
-		}
-	}
 
-	
+
 }
 
